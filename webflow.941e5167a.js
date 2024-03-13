@@ -1951,6 +1951,29 @@
   require_webflow_scroll();
   require_webflow_touch();
 })();
+var canvas = document.getElementById('webgl-canvas');
+
+// Function to override canvas size
+function resizeCanvasToDisplaySize(canvas) {
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+
+  // Check if the canvas is not the same size.
+  if (canvas.width !== width || canvas.height !== height) {
+    // Make the canvas the same size
+    canvas.width = width;
+    canvas.height = height;
+    return true; // It had to be resized.
+  }
+
+  return false; // No resizing was necessary.
+}
+
+// Call this function every time you render or when the window resizes
+resizeCanvasToDisplaySize(canvas);
+
+// Add an event listener to resize on window resize
+window.addEventListener('resize', () => resizeCanvasToDisplaySize(canvas));
 /*!
  * tram.js v0.8.2-global
  * Cross-browser CSS3 transitions in JavaScript
